@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bernards Estate Agents — WordPress Implementation Guide | Cold Lava</title>
+<style>
+  /* ── Reset & Base ──────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+    font-size: 16px;
+    line-height: 1.7;
+    color: #2B2B2B;
+    background: #ffffff;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Layout ────────────────────────────────────── */
+  .container { max-width: 860px; margin: 0 auto; padding: 0 32px 80px; }
+
+  /* ── Header ────────────────────────────────────── */
+  .doc-header {
+    background: linear-gradient(135deg, #0B2447 0%, #1a3a6b 50%, #5D3384 100%);
+    color: #fff;
+    padding: 48px 32px 44px;
+    text-align: center;
+  }
+  .doc-header .logo {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #00DEB6;
+    margin-bottom: 6px;
+  }
+  .doc-header .logo-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: #00DEB6;
+    border-radius: 50%;
+    margin-right: 4px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+  }
+  .doc-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 14px 0 8px;
+    line-height: 1.25;
+    letter-spacing: -0.3px;
+  }
+  .doc-header .subtitle {
+    font-size: 15px;
+    font-weight: 400;
+    opacity: 0.8;
+  }
+  .doc-meta {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 24px;
+    font-size: 13px;
+    opacity: 0.75;
+    flex-wrap: wrap;
+  }
+  .doc-meta span { white-space: nowrap; }
+
+  /* ── Table of Contents ─────────────────────────── */
+  .toc {
+    background: #f8f9fb;
+    border: 1px solid #e4e7ec;
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin: 40px 0 48px;
+  }
+  .toc h2 {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #5D3384;
+    margin-bottom: 16px;
+  }
+  .toc ol {
+    list-style: none;
+    counter-reset: toc-counter;
+    padding: 0;
+    columns: 2;
+    column-gap: 24px;
+  }
+  .toc li {
+    counter-increment: toc-counter;
+    margin-bottom: 8px;
+    break-inside: avoid;
+  }
+  .toc li::before {
+    content: counter(toc-counter, decimal-leading-zero) ".";
+    font-weight: 600;
+    color: #5D3384;
+    margin-right: 8px;
+    font-size: 13px;
+  }
+  .toc a {
+    color: #2B2B2B;
+    text-decoration: none;
+    font-size: 14.5px;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+  .toc a:hover { color: #5D3384; }
+
+  /* ── Headings ──────────────────────────────────── */
+  h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0B2447;
+    margin: 56px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e4e7ec;
+    scroll-margin-top: 24px;
+  }
+  h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1a3a6b;
+    margin: 32px 0 12px;
+  }
+  h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #5D3384;
+    margin: 24px 0 8px;
+  }
+
+  /* ── Paragraphs & Lists ────────────────────────── */
+  p { margin: 0 0 16px; }
+  ul, ol { margin: 0 0 16px; padding-left: 24px; }
+  li { margin-bottom: 6px; }
+  li > ul, li > ol { margin-top: 6px; margin-bottom: 0; }
+
+  strong { font-weight: 600; }
+
+  /* ── Links ─────────────────────────────────────── */
+  a { color: #5D3384; text-decoration: underline; text-decoration-color: rgba(93,51,132,0.3); }
+  a:hover { text-decoration-color: #5D3384; }
+
+  /* ── Code ──────────────────────────────────────── */
+  code {
+    font-family: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", Menlo, Consolas, monospace;
+    font-size: 13.5px;
+    background: #f1f3f5;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #c7254e;
+  }
+  pre {
+    background: #f6f7f9;
+    border: 1px solid #e4e7ec;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 0 0 20px;
+    overflow-x: auto;
+    line-height: 1.55;
+  }
+  pre code {
+    background: none;
+    padding: 0;
+    color: #2B2B2B;
+    font-size: 13px;
+  }
+
+  /* ── Tables ────────────────────────────────────── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 20px;
+    font-size: 14.5px;
+  }
+  thead th {
+    background: #0B2447;
+    color: #fff;
+    font-weight: 600;
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  thead th:first-child { border-radius: 6px 0 0 0; }
+  thead th:last-child { border-radius: 0 6px 0 0; }
+  tbody td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #edf0f4;
+    vertical-align: top;
+  }
+  tbody tr:hover { background: #fafafc; }
+
+  /* ── Horizontal Rules ──────────────────────────── */
+  hr {
+    border: none;
+    border-top: 1px solid #e4e7ec;
+    margin: 48px 0;
+  }
+
+  /* ── Checklist ─────────────────────────────────── */
+  .checklist { list-style: none; padding-left: 0; }
+  .checklist li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 8px;
+  }
+  .checklist li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 4px;
+    width: 18px; height: 18px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background: #fff;
+  }
+
+  /* ── Info Boxes ────────────────────────────────── */
+  .info-box {
+    background: #f0ebf8;
+    border-left: 4px solid #5D3384;
+    border-radius: 0 8px 8px 0;
+    padding: 14px 20px;
+    margin: 16px 0 20px;
+    font-size: 14.5px;
+  }
+
+  /* ── Footer ────────────────────────────────────── */
+  .doc-footer {
+    text-align: center;
+    padding: 32px;
+    font-size: 13px;
+    color: #999;
+    border-top: 1px solid #e4e7ec;
+    margin-top: 48px;
+  }
+  .doc-footer a { color: #5D3384; }
+
+  /* ── Print ─────────────────────────────────────── */
+  @media print {
+    .doc-header { background: #0B2447 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .toc { break-after: page; }
+    h2 { break-after: avoid; }
+    pre, table { break-inside: avoid; }
+    body { font-size: 11pt; }
+    .container { max-width: 100%; padding: 0 24px 40px; }
+    a { text-decoration: none; color: #2B2B2B; }
+    a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 9pt; color: #888; }
+  }
+
+  /* ── Responsive ────────────────────────────────── */
+  @media (max-width: 640px) {
+    .doc-header { padding: 32px 20px 28px; }
+    .doc-header h1 { font-size: 22px; }
+    .container { padding: 0 20px 60px; }
+    .toc ol { columns: 1; }
+    .doc-meta { flex-direction: column; gap: 6px; }
+    table { font-size: 13px; }
+    thead th, tbody td { padding: 8px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══════════════════════════════════════ -->
+<header class="doc-header">
+  <div class="logo"><span class="logo-dot"></span>COLD LAVA</div>
+  <h1>Bernards Estate Agents</h1>
+  <p class="subtitle">WordPress Implementation Guide</p>
+  <div class="doc-meta">
+    <span><strong>Prepared for:</strong> Sam (WordPress/Elementor Developer)</span>
+    <span><strong>Date:</strong> July 2026</span>
+    <span><strong>Demo:</strong> <a href="https://bernards-clone.vercel.app" style="color:#00DEB6;">bernards-clone.vercel.app</a></span>
+  </div>
+</header>
+
+<!-- ═══ BODY ═════════════════════════════════════════ -->
+<div class="container">
+
+<!-- ── Table of Contents ─────────────────────────── -->
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#s1">Package Contents</a></li>
+    <li><a href="#s2">WordPress Plugin Installation</a></li>
+    <li><a href="#s3">Property Search Page</a></li>
+    <li><a href="#s4">Single Property Page</a></li>
+    <li><a href="#s5">Contact Page</a></li>
+    <li><a href="#s6">Homepage</a></li>
+    <li><a href="#s7">CSS Integration</a></li>
+    <li><a href="#s8">Property Data Schema</a></li>
+    <li><a href="#s9">Vebra Alto API Integration</a></li>
+    <li><a href="#s10">Navigation &amp; URL Structure</a></li>
+    <li><a href="#s11">Assets &amp; Dependencies</a></li>
+    <li><a href="#s12">Implementation Checklist</a></li>
+  </ol>
+</nav>
+
+<!-- ═══ SECTION 1 ════════════════════════════════════ -->
+<h2 id="s1">1. Package Contents</h2>
+
+<pre><code>bernards-handover-package.zip
+├── HANDOVER-GUIDE.md                        ← This file
+├── cold-lava-property-search.zip            ← WordPress plugin (installable zip)
+├── cold-lava-property-search/               ← Plugin source (for reference)
+│   ├── cold-lava-property-search.php
+│   ├── README.md
+│   ├── assets/css/
+│   │   ├── property-search.css
+│   │   └── single-property.css
+│   ├── assets/js/
+│   │   ├── property-search.js
+│   │   └── single-property.js
+│   └── includes/
+│       ├── class-admin-settings.php
+│       ├── class-contact-page.php
+│       ├── class-property-search.php
+│       ├── class-single-property.php
+│       └── class-vebra-api.php
+├── assets/
+│   ├── css/property-search.css              ← Master CSS (~2,700 lines)
+│   └── js/properties.js                     ← Demo property data (12 properties)
+├── index.html                               ← Homepage reference
+├── property-search-b1/index.html            ← Property search reference
+├── single-property/index.html               ← Property detail reference
+├── contact-us-b1/index.html                 ← Contact page reference
+└── PENDING-FIXES.md</code></pre>
+
+<p>The <strong>HTML files</strong> are static reference implementations — use them as a visual guide and source of markup. The <strong>WordPress plugin</strong> is the production implementation.</p>
+
+<!-- ═══ SECTION 2 ════════════════════════════════════ -->
+<h2 id="s2">2. WordPress Plugin Installation</h2>
+
+<h3>Install</h3>
+<ol>
+  <li>In WordPress admin, go to <strong>Plugins → Add New → Upload Plugin</strong></li>
+  <li>Upload <code>cold-lava-property-search.zip</code></li>
+  <li>Click <strong>Install Now</strong>, then <strong>Activate</strong></li>
+  <li>A new settings page appears at <strong>Settings → Property Search</strong></li>
+</ol>
+
+<h3>What the Plugin Does</h3>
+<ul>
+  <li>Registers three shortcodes (see below)</li>
+  <li>Enqueues all required CSS and JS automatically</li>
+  <li>Connects to the Vebra Alto API for live property data</li>
+  <li>Falls back to 12 demo Portsmouth properties when Vebra is not configured</li>
+  <li>Caches API responses server-side (15-minute TTL)</li>
+</ul>
+
+<h3>Plugin Settings (Settings → Property Search)</h3>
+<table>
+  <thead><tr><th>Setting</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td>Data Feed ID</td><td>Your Vebra Alto data feed ID</td></tr>
+    <tr><td>Username</td><td>Vebra API username</td></tr>
+    <tr><td>Password</td><td>Vebra API password</td></tr>
+    <tr><td>Agent Name</td><td>Displayed on property cards (e.g. "Bernards Estate Agents, Southsea")</td></tr>
+    <tr><td>Agent Phone</td><td>Shown on cards and detail pages</td></tr>
+    <tr><td>Agent Email</td><td>Used for enquiry forms</td></tr>
+    <tr><td>Show Placeholders</td><td>Toggle demo properties on/off (turn off once Vebra is live)</td></tr>
+  </tbody>
+</table>
+
+<h3>Shortcodes</h3>
+<table>
+  <thead><tr><th>Shortcode</th><th>Purpose</th><th>Suggested Page</th></tr></thead>
+  <tbody>
+    <tr><td><code>[cl_property_search]</code></td><td>Full property search with filters, cards, sorting</td><td><code>/property-search/</code></td></tr>
+    <tr><td><code>[cl_single_property]</code></td><td>Property detail with gallery, features, agent card</td><td><code>/single-property/</code></td></tr>
+    <tr><td><code>[cl_contact_page]</code></td><td>Contact page with interactive map and office cards</td><td><code>/contact-us/</code></td></tr>
+  </tbody>
+</table>
+
+<div class="info-box"><strong>All shortcode pages should use the Elementor Full Width template.</strong></div>
+
+<!-- ═══ SECTION 3 ════════════════════════════════════ -->
+<h2 id="s3">3. Property Search Page</h2>
+
+<h3>Setup</h3>
+<ol>
+  <li>Create a new page: <strong>Property Search</strong></li>
+  <li>Set the page template to <strong>Elementor Full Width</strong></li>
+  <li>Add a Shortcode widget containing: <code>[cl_property_search]</code></li>
+  <li>Publish</li>
+</ol>
+
+<h3>What It Renders</h3>
+
+<h4>Filter Bar (sticky, dark background)</h4>
+<ul>
+  <li>Location text search</li>
+  <li>Radius dropdown</li>
+  <li>Min/max price dropdowns</li>
+  <li>Bedrooms dropdown</li>
+  <li>Property type dropdown</li>
+  <li>Purple "Search" button</li>
+</ul>
+
+<h4>Property Cards (list layout)</h4>
+<ul>
+  <li>Left column (40%): main image, thumbnail strip, badges (FEATURED/REDUCED/NEW HOME), photo count</li>
+  <li>Right column (60%): price, address, type badge, bed/bath/reception specs, 2-line description, agent footer</li>
+  <li>Each card is a clickable <code>&lt;a&gt;</code> link to <code>/single-property/?id={property_id}</code></li>
+  <li>Hover effect: subtle lift + image zoom</li>
+</ul>
+
+<h4>Sorting Options</h4>
+<ul>
+  <li>Featured (default), Price Low→High, Price High→Low, Newest, Most Bedrooms</li>
+</ul>
+
+<h3>Key Technical Detail</h3>
+<p>Property cards use <code>display: table</code> layout (not flexbox/grid). This is intentional — it prevents Elementor from overriding the side-by-side image + details layout:</p>
+
+<pre><code>.rm-property-card { display: table !important; table-layout: fixed !important; }
+.rm-property-card > .rm-card-images { display: table-cell !important; width: 40% !important; }
+.rm-property-card > .rm-card-details { display: table-cell !important; width: 60% !important; }</code></pre>
+
+<h3>Reference File</h3>
+<p><code>property-search-b1/index.html</code> — Contains the full filter bar HTML, <code>renderCard()</code> JS function, and filter/sort logic inline (~769 lines).</p>
+
+<!-- ═══ SECTION 4 ════════════════════════════════════ -->
+<h2 id="s4">4. Single Property Page</h2>
+
+<h3>Setup</h3>
+<ol>
+  <li>Create a new page: <strong>Single Property</strong> (slug: <code>single-property</code>)</li>
+  <li>Set the page template to <strong>Elementor Full Width</strong></li>
+  <li>Add a Shortcode widget containing: <code>[cl_single_property]</code></li>
+  <li>Publish</li>
+</ol>
+
+<p>The page reads the property ID from the URL query string (<code>?id=3</code>).</p>
+
+<h3>What It Renders</h3>
+<ul>
+  <li><strong>Photo Gallery:</strong> 60/40 grid layout (main image + 2 side thumbnails). Click any image to open a fullscreen lightbox with arrow-key navigation.</li>
+  <li><strong>Property Header:</strong> Address, property type, price, share/heart icon buttons, badges</li>
+  <li><strong>Info Strip:</strong> Horizontal bar with icons — beds, baths, receptions, sqft, type, tenure</li>
+  <li><strong>Key Features:</strong> Two-column checklist with green ✓ markers</li>
+  <li><strong>Description:</strong> Collapsible "Read more" toggle for long descriptions</li>
+  <li><strong>EPC Rating:</strong> Colour-coded badge (A through G)</li>
+  <li><strong>Agent Card:</strong> Sticky sidebar with logo, phone (clickable <code>tel:</code> link), email, "Request Details" button</li>
+  <li><strong>Request Details Modal:</strong> Form collecting Full Name, Phone, Email — shows success confirmation on submit. Wire to your preferred form handler or email in WordPress.</li>
+  <li><strong>Book Free Evaluation CTA:</strong> Purple button linking to <code>/valuations/</code></li>
+  <li><strong>Map:</strong> OpenStreetMap embed (uses property GPS coordinates)</li>
+  <li><strong>Similar Properties:</strong> 3-card grid at bottom</li>
+</ul>
+
+<h3>Lightbox</h3>
+<p>The lightbox is vanilla JS — no external libraries. Supports:</p>
+<ul>
+  <li>Arrow key navigation (left/right)</li>
+  <li>Close on Escape or X button</li>
+  <li>Swipe on mobile</li>
+</ul>
+
+<h3>Reference File</h3>
+<p><code>single-property/index.html</code> — Full page markup with inline JS (~815 lines).</p>
+
+<!-- ═══ SECTION 5 ════════════════════════════════════ -->
+<h2 id="s5">5. Contact Page</h2>
+
+<h3>Setup</h3>
+<ol>
+  <li>Create or edit the <strong>Contact Us</strong> page</li>
+  <li>Set the page template to <strong>Elementor Full Width</strong></li>
+  <li>Add a Shortcode widget containing: <code>[cl_contact_page]</code></li>
+  <li>Publish</li>
+</ol>
+
+<h3>What It Renders</h3>
+
+<h4>Interactive Map</h4>
+<ul>
+  <li>Uses <strong>Leaflet.js</strong> (loaded from CDN — no API key required)</li>
+  <li>Map tiles: OpenStreetMap</li>
+  <li>Purple pin markers for all 8 Bernards offices</li>
+  <li>Click a marker to see office name, address, and phone number</li>
+</ul>
+
+<h4>Office Cards (8 branches)</h4>
+<table>
+  <thead><tr><th>Office</th><th>Phone</th><th>Email</th></tr></thead>
+  <tbody>
+    <tr><td>Admiralty Quarter</td><td>023 9200 8575</td><td>southsea@bernardsea.co.uk</td></tr>
+    <tr><td>Southsea</td><td>023 9286 4974</td><td>southsea@bernardsea.co.uk</td></tr>
+    <tr><td>Drayton</td><td>02392 728091</td><td>drayton@bernardsEA.co.uk</td></tr>
+    <tr><td>Fareham</td><td>01329 756500</td><td>fareham@bernardsEA.co.uk</td></tr>
+    <tr><td>Waterlooville</td><td>023 9223 2888</td><td>waterlooville@bernardsea.co.uk</td></tr>
+    <tr><td>Gosport</td><td>02392 0046601</td><td>gosport@bernardsEA.co.uk</td></tr>
+    <tr><td>Lee-On-The-Solent</td><td>02392 553636</td><td>leeonsolent@bernardsea.co.uk</td></tr>
+    <tr><td>Havant</td><td>02392 482 147</td><td>havant@bernardsea.co.uk</td></tr>
+  </tbody>
+</table>
+
+<p>All phone numbers use <code>&lt;a href="tel:..."&gt;</code> for mobile tap-to-call.</p>
+
+<h4>Inquiry Form</h4>
+<ul>
+  <li>General inquiry form below the office cards</li>
+  <li>Collects: Name, Email, Phone, Message, Preferred Branch</li>
+  <li>Wire to your preferred form handler in WordPress</li>
+</ul>
+
+<h3>Reference File</h3>
+<p><code>contact-us-b1/index.html</code> — Full page markup (~863 lines).</p>
+
+<!-- ═══ SECTION 6 ════════════════════════════════════ -->
+<h2 id="s6">6. Homepage</h2>
+
+<p>The homepage is built in Elementor. The following custom sections need to be added to the existing page.</p>
+
+<h3>Search Hero Section</h3>
+<ul>
+  <li>Dark navy gradient background</li>
+  <li>Heading: "Start your search..."</li>
+  <li>Three tabs: <strong>Buy</strong> | <strong>Rent</strong> | <strong>Sold</strong></li>
+  <li>Location text input + green SEARCH button</li>
+  <li>Form submits to <code>/property-search/?search={query}&amp;type=buy</code> (or <code>rent</code>/<code>sold</code>)</li>
+  <li>CSS class: <code>.bernards-search-hero</code></li>
+</ul>
+
+<div class="info-box"><strong>Implementation:</strong> Copy the hero HTML from <code>index.html</code> into an Elementor HTML widget, or rebuild using Elementor widgets styled with the custom CSS.</div>
+
+<h3>Recent Instructions (Property Cards)</h3>
+<ul>
+  <li>4 property cards showcasing recent listings</li>
+  <li>Each card: image, price, address, bed/bath count, For Sale/To Let badge</li>
+  <li>Cards link to single property pages</li>
+</ul>
+
+<div class="info-box"><strong>Implementation:</strong> Once the Vebra API is connected, these can pull the 4 most recent properties dynamically via the plugin, or be built as static Elementor content.</div>
+
+<h3>Book Free Evaluation CTA</h3>
+<ul>
+  <li>Navy gradient banner section</li>
+  <li>Green CTA button linking to <code>/valuations/</code></li>
+</ul>
+
+<h3>Reference File</h3>
+<p><code>index.html</code> — Full homepage clone with all sections.</p>
+
+<!-- ═══ SECTION 7 ════════════════════════════════════ -->
+<h2 id="s7">7. CSS Integration</h2>
+
+<h3>Option A: Plugin Handles It (Recommended)</h3>
+<p>When the <code>cold-lava-property-search</code> plugin is active, it automatically enqueues all required CSS for the shortcode pages. No manual CSS work needed for plugin pages.</p>
+
+<h3>Option B: Manual Integration</h3>
+<p>For sections outside the plugin (e.g. homepage hero, custom Elementor sections), add CSS from <code>assets/css/property-search.css</code>:</p>
+
+<h4>Elementor Custom CSS</h4>
+<p>Appearance → Elementor → Custom CSS → paste relevant sections</p>
+
+<h4>Child Theme</h4>
+<p>Add to <code>style.css</code> in your child theme</p>
+
+<h4>Manual Enqueue</h4>
+<pre><code>function bernards_custom_css() {
+    wp_enqueue_style(
+        'bernards-property-search',
+        get_template_directory_uri() . '/assets/css/property-search.css',
+        array(),
+        '1.1.0'
+    );
+}
+add_action( 'wp_enqueue_scripts', 'bernards_custom_css' );</code></pre>
+
+<h3>Brand Colours (CSS Variables)</h3>
+<pre><code>:root {
+    --rm-green: #00DEB6;        /* Teal/green accent */
+    --rm-dark-green: #00b894;   /* Hover state */
+    --rm-navy: #0B2447;         /* Primary dark blue */
+    --rm-purple: #5D3384;       /* Bernards purple */
+    --rm-dark: #2B2B2B;         /* Near black */
+    --rm-font: "Montserrat", sans-serif;
+}</code></pre>
+
+<h3>Elementor Compatibility Notes</h3>
+<ul>
+  <li>Property cards use <code>display: table</code> with <code>!important</code> to prevent Elementor from overriding layouts</li>
+  <li>Contrast styles on dark backgrounds use <code>!important</code> to override Elementor's inline styles</li>
+  <li>All custom CSS classes use the <code>rm-</code> prefix to avoid conflicts</li>
+</ul>
+
+<!-- ═══ SECTION 8 ════════════════════════════════════ -->
+<h2 id="s8">8. Property Data Schema</h2>
+
+<p>Each property object follows this schema. The plugin maps Vebra API data to this structure automatically. The demo data in <code>assets/js/properties.js</code> uses the same schema.</p>
+
+<pre><code>{
+    id: 1,
+    title: "3 bedroom semi-detached house for sale",
+    address: "Merton Road, Southsea, Portsmouth, PO5",
+    area: "Southsea",
+    price: 325000,
+    priceDisplay: "£325,000",
+    priceLabel: "Guide Price",        // "Guide Price", "Offers Over", etc.
+    status: "sale",                   // "sale" or "rent"
+    type: "house",                    // "house" or "flat"
+    subtype: "Semi-Detached",
+    beds: 3,
+    baths: 1,
+    reception: 2,
+    sqft: 1150,
+    featured: true,
+    badge: "FEATURED",                // "FEATURED", "REDUCED", "NEW HOME", or ""
+    dateAdded: "28/06/2025",
+    tenure: "Freehold",
+    councilTax: "C",
+    parking: "Yes",
+    garden: "Yes",
+    epcRating: "D",                   // A through G
+    description: "Short description for card view...",
+    fullDescription: [
+        "Full paragraph 1...",
+        "Full paragraph 2..."
+    ],
+    keyFeatures: [
+        "Feature 1",
+        "Feature 2"
+    ],
+    images: [
+        "https://example.com/image1.jpg",
+        "https://example.com/image2.jpg"
+    ],
+    floorplanImages: [],
+    lat: 50.7822,
+    lng: -1.0750
+}</code></pre>
+
+<h3>Mapping to WordPress Custom Post Types</h3>
+<p>If you want to store properties as CPTs instead of (or alongside) the API:</p>
+
+<table>
+  <thead><tr><th>Property Field</th><th>CPT Meta Key (suggested)</th></tr></thead>
+  <tbody>
+    <tr><td><code>price</code></td><td><code>_property_price</code></td></tr>
+    <tr><td><code>beds</code></td><td><code>_property_bedrooms</code></td></tr>
+    <tr><td><code>baths</code></td><td><code>_property_bathrooms</code></td></tr>
+    <tr><td><code>reception</code></td><td><code>_property_receptions</code></td></tr>
+    <tr><td><code>sqft</code></td><td><code>_property_sqft</code></td></tr>
+    <tr><td><code>type</code></td><td><code>_property_type</code></td></tr>
+    <tr><td><code>subtype</code></td><td><code>_property_subtype</code></td></tr>
+    <tr><td><code>status</code></td><td><code>_property_status</code></td></tr>
+    <tr><td><code>tenure</code></td><td><code>_property_tenure</code></td></tr>
+    <tr><td><code>epcRating</code></td><td><code>_property_epc</code></td></tr>
+    <tr><td><code>lat</code> / <code>lng</code></td><td><code>_property_lat</code> / <code>_property_lng</code></td></tr>
+    <tr><td><code>images</code></td><td>Post gallery / ACF repeater</td></tr>
+    <tr><td><code>keyFeatures</code></td><td><code>_property_features</code> (serialised array)</td></tr>
+  </tbody>
+</table>
+
+<p>The plugin currently pulls data from the Vebra API at runtime. If you need a CPT-based approach, the schema above is the data contract the front-end expects.</p>
+
+<!-- ═══ SECTION 9 ════════════════════════════════════ -->
+<h2 id="s9">9. Vebra Alto API Integration</h2>
+
+<h3>Obtaining Credentials</h3>
+<p>Contact Vebra Alto support to request API access. You will receive:</p>
+<ul>
+  <li><strong>Data Feed ID</strong> (numeric, e.g. <code>12345</code>)</li>
+  <li><strong>API Username</strong></li>
+  <li><strong>API Password</strong></li>
+</ul>
+<p>These are separate from normal Vebra CRM login credentials.</p>
+<p><strong>Vebra Support:</strong> <a href="mailto:support@vebra.com">support@vebra.com</a></p>
+
+<h3>Configuration</h3>
+<ol>
+  <li>Go to <strong>Settings → Property Search</strong> in WordPress admin</li>
+  <li>Enter the three credentials</li>
+  <li>Click <strong>Save Changes</strong></li>
+  <li>Click <strong>Test Vebra API Connection</strong> to verify</li>
+</ol>
+
+<h3>How It Works</h3>
+<p>The plugin's <code>class-vebra-api.php</code> handles:</p>
+<ol>
+  <li><strong>Authentication</strong> — Token-based auth with automatic refresh</li>
+  <li><strong>Data Fetching</strong> — Retrieves branches and properties from the Vebra API</li>
+  <li><strong>XML Parsing</strong> — Converts Vebra's XML responses into the JS property schema</li>
+  <li><strong>Caching</strong> — Server-side transient cache (15-minute TTL) for performance</li>
+  <li><strong>Fallback</strong> — Shows 12 demo Portsmouth properties if the API is not configured or unreachable</li>
+</ol>
+
+<h3>Cache Management</h3>
+<ul>
+  <li>Cache clears automatically every 15 minutes</li>
+  <li>Manual clear: <strong>Settings → Property Search → Clear Property Cache</strong></li>
+  <li>Deactivating the plugin clears all cached data</li>
+</ul>
+
+<h3>Requirements</h3>
+<ul>
+  <li>PHP 7.4+</li>
+  <li>Outbound HTTPS access from the WordPress server (some managed hosts block this)</li>
+  <li>WordPress 6.0+</li>
+</ul>
+
+<!-- ═══ SECTION 10 ═══════════════════════════════════ -->
+<h2 id="s10">10. Navigation &amp; URL Structure</h2>
+
+<h3>Recommended Page Slugs</h3>
+<p>The reference HTML files use <code>-b1</code> suffixed slugs. Use clean slugs on the live site:</p>
+
+<table>
+  <thead><tr><th>Page</th><th>Slug</th></tr></thead>
+  <tbody>
+    <tr><td>Property Search</td><td><code>/property-search/</code></td></tr>
+    <tr><td>Single Property</td><td><code>/single-property/</code></td></tr>
+    <tr><td>Contact Us</td><td><code>/contact-us/</code></td></tr>
+    <tr><td>About Us</td><td><code>/about-us/</code></td></tr>
+    <tr><td>Selling</td><td><code>/selling/</code></td></tr>
+    <tr><td>Landlords</td><td><code>/landlords/</code></td></tr>
+    <tr><td>Land &amp; New Homes</td><td><code>/land-and-new-homes/</code></td></tr>
+  </tbody>
+</table>
+
+<h3>Redirects</h3>
+<p>Set up 301 redirects for any legacy URLs:</p>
+<table>
+  <thead><tr><th>Old URL</th><th>Redirect To</th></tr></thead>
+  <tbody>
+    <tr><td><code>/for-sale/</code></td><td><code>/property-search/</code></td></tr>
+    <tr><td><code>/for-rent/</code></td><td><code>/property-search/?type=rent</code></td></tr>
+  </tbody>
+</table>
+
+<h3>Internal Links</h3>
+<p>The search hero links to: <code>/property-search/?search={query}&amp;type=buy</code><br>
+Property cards link to: <code>/single-property/?id={property_id}</code><br>
+Valuation CTAs link to: <code>/valuations/</code></p>
+<p>Update the header and footer navigation to use the final slugs.</p>
+
+<!-- ═══ SECTION 11 ═══════════════════════════════════ -->
+<h2 id="s11">11. Assets &amp; Dependencies</h2>
+
+<h3>External Dependencies</h3>
+<table>
+  <thead><tr><th>Library</th><th>Source</th><th>Used By</th><th>API Key?</th></tr></thead>
+  <tbody>
+    <tr><td>Leaflet.js</td><td>CDN (<code>unpkg.com/leaflet@1.9.4</code>)</td><td>Contact page map</td><td>No</td></tr>
+    <tr><td>OpenStreetMap tiles</td><td><code>tile.openstreetmap.org</code></td><td>Contact page + single property map</td><td>No</td></tr>
+    <tr><td>Google Fonts (Montserrat)</td><td><code>fonts.googleapis.com</code></td><td>All pages</td><td>No</td></tr>
+  </tbody>
+</table>
+
+<h3>Images</h3>
+<p>The demo properties use <strong>Unsplash</strong> placeholder images. These will be replaced by actual property photos from the Vebra API once connected.</p>
+<p>Ensure the following Bernards brand assets are in the WordPress Media Library:</p>
+<ul>
+  <li>Bernards logo (header): <code>Bernards-logo-final.png</code></li>
+  <li>Google Reviews badge: <code>google-reviews-white.png</code></li>
+  <li>Office photos (for contact page cards, if desired)</li>
+  <li>Homepage background video (if using the video hero)</li>
+</ul>
+
+<h3>Fonts</h3>
+<p>The design uses <strong>Montserrat</strong> (Google Fonts). The existing WordPress theme likely already loads this. If not:</p>
+<pre><code>&lt;link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&amp;display=swap" rel="stylesheet"&gt;</code></pre>
+
+<h3>Icon Libraries</h3>
+<ul>
+  <li><strong>Font Awesome 5</strong> — Used for misc icons (loaded by Elementor)</li>
+  <li><strong>Custom SVGs</strong> — Bed, bath, reception icons are inline SVGs in the CSS/HTML (no additional icon library needed)</li>
+</ul>
+
+<!-- ═══ SECTION 12 ═══════════════════════════════════ -->
+<h2 id="s12">12. Implementation Checklist</h2>
+
+<h3>Phase 1: Plugin Setup</h3>
+<ul class="checklist">
+  <li>Install and activate <code>cold-lava-property-search.zip</code></li>
+  <li>Configure agent details in Settings → Property Search</li>
+  <li>Verify demo properties load on a test page</li>
+</ul>
+
+<h3>Phase 2: Create Pages</h3>
+<ul class="checklist">
+  <li>Create <strong>Property Search</strong> page → <code>[cl_property_search]</code> → Elementor Full Width</li>
+  <li>Create <strong>Single Property</strong> page → <code>[cl_single_property]</code> → Elementor Full Width</li>
+  <li>Create/update <strong>Contact Us</strong> page → <code>[cl_contact_page]</code> → Elementor Full Width</li>
+  <li>Verify all three pages render correctly</li>
+</ul>
+
+<h3>Phase 3: Homepage</h3>
+<ul class="checklist">
+  <li>Add search hero section (from <code>index.html</code> reference)</li>
+  <li>Add Recent Instructions property cards section</li>
+  <li>Add Book Free Evaluation CTA banner</li>
+  <li>Link search form to <code>/property-search/</code></li>
+</ul>
+
+<h3>Phase 4: Navigation &amp; URLs</h3>
+<ul class="checklist">
+  <li>Update header nav links to final slugs</li>
+  <li>Update footer nav links to final slugs</li>
+  <li>Set up 301 redirects for old URLs</li>
+  <li>Verify all "Book a Valuation" buttons link to <code>/valuations/</code></li>
+</ul>
+
+<h3>Phase 5: Vebra Alto API</h3>
+<ul class="checklist">
+  <li>Obtain Vebra API credentials</li>
+  <li>Enter credentials in Settings → Property Search</li>
+  <li>Test API connection</li>
+  <li>Disable placeholder properties once live data is confirmed</li>
+  <li>Verify property images load from Vebra</li>
+</ul>
+
+<h3>Phase 6: Testing</h3>
+<ul class="checklist">
+  <li>Desktop: property search filters, sorting, card links</li>
+  <li>Desktop: single property lightbox, inquiry form, agent card</li>
+  <li>Desktop: contact page map, office cards, phone links</li>
+  <li>Mobile/tablet: all pages responsive</li>
+  <li>Cross-browser: Chrome, Firefox, Safari, Edge</li>
+  <li>Performance: page load times acceptable</li>
+</ul>
+
+</div><!-- /.container -->
+
+<!-- ═══ FOOTER ═══════════════════════════════════════ -->
+<footer class="doc-footer">
+  <p>Prepared by <strong><a href="mailto:hello@coldlava.co.uk">Cold Lava</a></strong> — hello@coldlava.co.uk</p>
+</footer>
+
+</body>
+</html>

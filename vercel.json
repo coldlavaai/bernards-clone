@@ -1,0 +1,13 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "functions": {
+    "api/vebra.js": {
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    { "source": "/api/vebra", "destination": "/api/vebra" },
+    { "source": "/(.*)", "destination": "/$1" }
+  ]
+}

@@ -1,0 +1,815 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name='robots' content='noindex, nofollow' />
+  <title>Property Details - Bernards Estate Agents</title>
+  <link rel='stylesheet' href='../wp-content/themes/hello-elementor/style.min.css?ver=3.1.1' media='all' />
+  <link rel='stylesheet' href='../wp-content/themes/hello-elementor/theme.min.css?ver=3.1.1' media='all' />
+  <link rel='stylesheet' href='../wp-content/themes/hello-elementor/header-footer.min.css?ver=3.1.1' media='all' />
+  <link rel='stylesheet' href='../wp-content/plugins/elementor/assets/css/frontend.min.css?ver=3.31.0' media='all' />
+  <link rel='stylesheet' href='../wp-content/uploads/elementor/css/post-18.css?ver=1770401964' media='all' />
+  <link rel='stylesheet' href='../wp-content/plugins/elementor-pro/assets/css/frontend.min.css?ver=3.21.3' media='all' />
+  <link rel='stylesheet' href='../wp-content/uploads/elementor/css/post-304.css?ver=1772013496' media='all' />
+  <link rel='stylesheet' href='../wp-content/uploads/elementor/css/post-317.css?ver=1772040187' media='all' />
+  <link rel='stylesheet' href='../wp-content/uploads/elementor/google-fonts/css/roboto.css?ver=1754487679' media='all' />
+  <link rel='stylesheet' href='../wp-content/uploads/elementor/google-fonts/css/montserrat.css?ver=1754489847' media='all' />
+  <link rel='stylesheet' href='../wp-content/uploads/elementor/google-fonts/css/heebo.css?ver=1754487683' media='all' />
+  <link rel='stylesheet' href='../wp-content/plugins/material-design-icons-for-elementor/assets/material-icons/css/material-icons-regular.css?ver=1.5.1' media='all' />
+  <link rel='stylesheet' href='../wp-content/plugins/elementskit-lite/widgets/init/assets/css/widget-styles.css?ver=3.7.7' media='all' />
+  <link rel='stylesheet' href='../wp-content/plugins/elementor/assets/css/widget-heading.min.css?ver=3.31.0' media='all' />
+  <link rel='stylesheet' href='../wp-content/plugins/elementor/assets/css/widget-image.min.css?ver=3.31.0' media='all' />
+  <link rel='stylesheet' href='../wp-content/plugins/elementor/assets/css/widget-social-icons.min.css?ver=3.31.0' media='all' />
+  <link rel='stylesheet' href='../wp-content/plugins/elementor/assets/css/widget-icon-list.min.css?ver=3.31.0' media='all' />
+  <link rel='stylesheet' href='../assets/css/property-search.css' media='all' />
+  <script src="../wp-includes/js/jquery/jquery.min.js?ver=3.7.1"></script>
+  <style class="bernards-global-font">* { font-family: "Montserrat", sans-serif !important; }</style>
+  <style>
+    body { background: #fff; margin: 0; }
+
+    /* === LIGHTBOX === */
+    .bernards-lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: rgba(0,0,0,0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .bernards-lightbox-overlay.active { opacity: 1; pointer-events: all; }
+    .bernards-lightbox-img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 4px;
+      user-select: none;
+    }
+    .bernards-lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      z-index: 10;
+    }
+    .bernards-lightbox-close:hover { background: rgba(255,255,255,0.3); }
+    .bernards-lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 28px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      z-index: 10;
+    }
+    .bernards-lightbox-nav:hover { background: rgba(255,255,255,0.3); }
+    .bernards-lightbox-prev { left: 20px; }
+    .bernards-lightbox-next { right: 20px; }
+    .bernards-lightbox-counter {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.7);
+      font-family: "Montserrat", sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    /* === INQUIRY MODAL === */
+    .bernards-inquiry-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99998;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .bernards-inquiry-overlay.active { opacity: 1; pointer-events: all; }
+    .bernards-inquiry-modal {
+      background: #fff;
+      border-radius: 12px;
+      padding: 32px;
+      max-width: 440px;
+      width: 90%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      position: relative;
+    }
+    .bernards-inquiry-modal h3 {
+      font-family: "Montserrat", sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #1B2A4A;
+      margin: 0 0 4px;
+    }
+    .bernards-inquiry-modal .biq-property-ref {
+      font-family: "Montserrat", sans-serif;
+      font-size: 12px;
+      color: #6b7280;
+      margin: 0 0 20px;
+    }
+    .bernards-inquiry-modal label {
+      display: block;
+      font-family: "Montserrat", sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: #1B2A4A;
+      margin: 0 0 4px;
+    }
+    .bernards-inquiry-modal input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid #e5e7eb;
+      border-radius: 8px;
+      font-family: "Montserrat", sans-serif;
+      font-size: 14px;
+      color: #1f2937;
+      outline: none;
+      margin-bottom: 14px;
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+    .bernards-inquiry-modal input:focus { border-color: #1B2A4A; }
+    .bernards-inquiry-modal .biq-submit {
+      width: 100%;
+      padding: 12px;
+      background: #1B2A4A;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: "Montserrat", sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .bernards-inquiry-modal .biq-submit:hover { background: #0f1a30; }
+    .bernards-inquiry-modal .biq-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: #6b7280;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background 0.2s;
+    }
+    .bernards-inquiry-modal .biq-close:hover { background: #f3f4f6; }
+    .bernards-inquiry-success {
+      text-align: center;
+      padding: 20px 0;
+    }
+    .bernards-inquiry-success svg {
+      width: 48px;
+      height: 48px;
+      fill: #00DEB6;
+      margin-bottom: 12px;
+    }
+    .bernards-inquiry-success h4 {
+      font-family: "Montserrat", sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #1B2A4A;
+      margin: 0 0 8px;
+    }
+    .bernards-inquiry-success p {
+      font-family: "Montserrat", sans-serif;
+      font-size: 13px;
+      color: #6b7280;
+      margin: 0;
+    }
+
+    /* === BOOK FREE EVALUATION CTA === */
+    .bernards-eval-cta {
+      background: linear-gradient(135deg, #1B2A4A 0%, #2d4470 100%);
+      padding: 28px;
+      border-radius: 8px;
+      text-align: center;
+      margin: 24px 0;
+    }
+    .bernards-eval-cta p {
+      font-family: "Montserrat", sans-serif;
+      font-size: 14px;
+      color: rgba(255,255,255,0.8);
+      margin: 0 0 14px;
+    }
+    .bernards-eval-cta a {
+      display: inline-block;
+      background: #00DEB6;
+      color: #1B2A4A;
+      font-family: "Montserrat", sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 12px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .bernards-eval-cta a:hover { background: #00b894; transform: translateY(-1px); }
+
+    /* === FIX: Spacing between sections === */
+    .sp-section {
+      margin-bottom: 24px;
+    }
+
+    /* === Targeted contrast fixes (buttons only) === */
+    .sp-agent-btn-primary { color: #fff !important; }
+    .sp-agent-btn-primary span { color: #fff !important; }
+    .sp-agent-btn-primary svg { fill: #fff !important; }
+    .sp-agent-btn[style*="background:var(--rm-purple)"] { color: #fff !important; }
+    .sp-agent-btn[style*="background:var(--rm-purple)"] span { color: #fff !important; }
+    .bernards-eval-cta p { color: rgba(255,255,255,0.85) !important; }
+    .bernards-eval-cta a { color: #1B2A4A !important; }
+  </style>
+</head>
+<body class="wp-singular page-template elementor-default elementor-template-full-width elementor-kit-18">
+
+<!-- HEADER -->
+<div data-elementor-type="header" data-elementor-id="304" class="elementor elementor-304 elementor-location-header">
+  <section class="elementor-section elementor-top-section elementor-element elementor-element-70b8e4af elementor-section-content-middle elementor-section-boxed elementor-section-height-default" data-id="70b8e4af" data-element_type="section" data-settings='{"background_background":"classic"}'>
+    <div class="elementor-container elementor-column-gap-default">
+      <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-696ee299">
+        <div class="elementor-widget-wrap elementor-element-populated">
+          <section class="elementor-section elementor-inner-section elementor-element elementor-element-44f83af5 elementor-section-content-middle elementor-reverse-tablet elementor-reverse-mobile elementor-section-boxed">
+            <div class="elementor-container elementor-column-gap-default">
+              <div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-66762fe8">
+                <div class="elementor-widget-wrap elementor-element-populated">
+                  <div class="elementor-element elementor-widget elementor-widget-image">
+                    <div class="elementor-widget-container">
+                      <a href="../"><img width="300" height="135" src="../wp-content/uploads/2025/01/Bernards-logo-final-e1572343780242.png" alt="Bernards Estate Agents" /></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-69476c00">
+                <div class="elementor-widget-wrap elementor-element-populated">
+                  <div class="elementor-element elementor-nav-menu__align-center elementor-nav-menu--stretch elementor-nav-menu--dropdown-tablet elementor-nav-menu__text-align-aside elementor-nav-menu--toggle elementor-nav-menu--burger elementor-widget elementor-widget-nav-menu">
+                    <div class="elementor-widget-container">
+                      <nav class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal e--pointer-none">
+                        <ul class="elementor-nav-menu">
+                          <li class="menu-item"><a href="../property-search-b1/" class="elementor-item">Property Search</a></li>
+                          <li class="menu-item"><a href="../selling-b1/" class="elementor-item">Selling</a></li>
+                          <li class="menu-item"><a href="../landlords-b1/" class="elementor-item">Landlords</a></li>
+                          <li class="menu-item"><a href="../land-an-new-home-b1/" class="elementor-item">Land &amp; New Homes</a></li>
+                          <li class="menu-item"><a href="../abouts-us-b1/" class="elementor-item">About Us</a></li>
+                          <li class="menu-item"><a href="../contact-us-b1/" class="elementor-item">Contact Us</a></li>
+                        </ul>
+                      </nav>
+                      <div class="elementor-menu-toggle" role="button" tabindex="0" aria-label="Menu Toggle" aria-expanded="false" onclick="this.classList.toggle('elementor-active');this.nextElementSibling.classList.toggle('elementor-nav-menu--dropdown-open');">
+                        <svg aria-hidden="true" class="elementor-menu-toggle__icon--open e-font-icon-svg e-eicon-menu-bar" viewBox="0 0 1000 1000"><path d="M104 333H896C929 333 958 304 958 271S929 208 896 208H104C71 208 42 237 42 271S71 333 104 333ZM104 583H896C929 583 958 554 958 521S929 458 896 458H104C71 458 42 487 42 521S71 583 104 583ZM104 833H896C929 833 958 804 958 771S929 708 896 708H104C71 708 42 737 42 771S71 833 104 833Z"></path></svg>
+                        <svg aria-hidden="true" class="elementor-menu-toggle__icon--close e-font-icon-svg e-eicon-close" viewBox="0 0 1000 1000"><path d="M742 167L500 408 258 167C246 154 233 150 217 150 196 150 179 158 167 167 154 179 150 196 150 212 150 229 154 242 171 254L408 500 167 742C138 771 138 800 167 829 196 858 225 858 254 829L496 587 738 829C750 842 767 846 783 846 800 846 817 842 829 829 842 817 846 804 846 783 846 767 842 750 829 737L588 500 833 258C863 229 863 200 833 171 804 137 775 137 742 167Z"></path></svg>
+                        <span class="elementor-screen-only">Menu</span>
+                      </div>
+                      <nav class="elementor-nav-menu--dropdown elementor-nav-menu__container" aria-hidden="true">
+                        <ul class="elementor-nav-menu">
+                          <li class="menu-item"><a href="../property-search-b1/" class="elementor-item" tabindex="-1">Property Search</a></li>
+                          <li class="menu-item"><a href="../selling-b1/" class="elementor-item" tabindex="-1">Selling</a></li>
+                          <li class="menu-item"><a href="../landlords-b1/" class="elementor-item" tabindex="-1">Landlords</a></li>
+                          <li class="menu-item"><a href="../land-an-new-home-b1/" class="elementor-item" tabindex="-1">Land &amp; New Homes</a></li>
+                          <li class="menu-item"><a href="../abouts-us-b1/" class="elementor-item" tabindex="-1">About Us</a></li>
+                          <li class="menu-item"><a href="../contact-us-b1/" class="elementor-item" tabindex="-1">Contact Us</a></li>
+                        </ul>
+                      </nav>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="elementor-column elementor-col-33 elementor-inner-column elementor-element elementor-element-1a77465 elementor-hidden-mobile">
+                <div class="elementor-widget-wrap elementor-element-populated">
+                  <div class="elementor-element elementor-align-left elementor-widget elementor-widget-button">
+                    <div class="elementor-widget-container">
+                      <div class="elementor-button-wrapper">
+                        <a class="elementor-button elementor-button-link elementor-size-sm" href="../valuations/">
+                          <span class="elementor-button-content-wrapper"><span class="elementor-button-text">Book a Valuation</span></span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- BACK BAR -->
+<div class="sp-back-bar">
+  <div class="sp-back-inner">
+    <a class="sp-back-link" href="../property-search-b1/">
+      <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      Back to search results
+    </a>
+  </div>
+</div>
+
+<!-- IMAGE GALLERY -->
+<div class="sp-gallery">
+  <div class="sp-gallery-grid" id="galleryGrid">
+    <!-- Populated by JS -->
+  </div>
+</div>
+
+<!-- HEADER SECTION -->
+<div class="sp-header-section" id="spHeaderSection">
+  <!-- Populated by JS -->
+</div>
+
+<!-- INFO STRIP -->
+<div class="sp-info-strip">
+  <div class="sp-info-strip-inner" id="spInfoStrip">
+    <!-- Populated by JS -->
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="sp-content">
+  <div class="sp-main" id="spMain">
+    <!-- Populated by JS -->
+  </div>
+  <div class="sp-sidebar">
+    <div class="sp-agent-card" id="spAgentCard">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- INFO CARDS ROW -->
+<div style="max-width:1200px;margin:0 auto;padding:0 20px;">
+  <div class="sp-info-cards" id="spInfoCards">
+    <!-- Populated by JS -->
+  </div>
+</div>
+
+<!-- MAP SECTION -->
+<div class="sp-content" style="padding-bottom:20px;">
+  <div class="sp-main">
+    <div class="sp-map-section" id="spMapSection">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+  <div class="sp-sidebar"></div>
+</div>
+
+<!-- SIMILAR PROPERTIES -->
+<div style="background:#f4f5f7;padding:40px 0;">
+  <div class="sp-similar">
+    <h2 class="sp-similar-title">Similar Properties Nearby</h2>
+    <div class="sp-similar-grid" id="similarGrid">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- BOOK FREE EVALUATION CTA -->
+<div style="max-width:1200px;margin:0 auto;padding:32px 24px;">
+  <div class="bernards-eval-cta">
+    <p>Thinking of selling? Get a free, no-obligation property evaluation from our local experts.</p>
+    <a href="../valuations/">Book Free Evaluation</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div data-elementor-type="footer" data-elementor-id="317" class="elementor elementor-317 elementor-location-footer">
+  <section class="elementor-section elementor-top-section elementor-element elementor-element-3f77a898 elementor-section-full_width" data-settings='{"background_background":"classic"}'>
+    <div class="elementor-background-overlay"></div>
+    <div class="elementor-container elementor-column-gap-default">
+      <div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-6069f38c">
+        <div class="elementor-widget-wrap elementor-element-populated">
+          <section class="elementor-section elementor-inner-section elementor-element elementor-element-5344013 elementor-section-full_width">
+            <div class="elementor-container elementor-column-gap-default">
+              <div class="elementor-column elementor-col-25 elementor-inner-column">
+                <div class="elementor-widget-wrap elementor-element-populated">
+                  <div class="elementor-element elementor-widget elementor-widget-image"><div class="elementor-widget-container"><a href="../"><img width="300" height="135" src="../wp-content/uploads/2025/01/Bernards-logo-final-e1572343780242.png" alt="" /></a></div></div>
+                  <div class="elementor-element elementor-widget elementor-widget-text-editor"><div class="elementor-widget-container"><p>We're an award winning estate agents and we are proud to consistently deliver above expectations.</p></div></div>
+                </div>
+              </div>
+              <div class="elementor-column elementor-col-25 elementor-inner-column">
+                <div class="elementor-widget-wrap elementor-element-populated">
+                  <div class="elementor-element elementor-widget elementor-widget-heading"><div class="elementor-widget-container"><h4 class="elementor-heading-title">Property</h4></div></div>
+                  <div class="elementor-element elementor-widget elementor-widget-icon-list"><div class="elementor-widget-container"><ul class="elementor-icon-list-items">
+                    <li class="elementor-icon-list-item"><a href="../property-search-b1/"><span class="elementor-icon-list-icon">&#8250;</span><span class="elementor-icon-list-text">Property Search</span></a></li>
+                    <li class="elementor-icon-list-item"><a href="../selling-b1/"><span class="elementor-icon-list-icon">&#8250;</span><span class="elementor-icon-list-text">Selling</span></a></li>
+                    <li class="elementor-icon-list-item"><a href="../landlords-b1/"><span class="elementor-icon-list-icon">&#8250;</span><span class="elementor-icon-list-text">Landlords</span></a></li>
+                    <li class="elementor-icon-list-item"><a href="../land-an-new-home-b1/"><span class="elementor-icon-list-icon">&#8250;</span><span class="elementor-icon-list-text">Land &amp; New Homes</span></a></li>
+                  </ul></div></div>
+                </div>
+              </div>
+              <div class="elementor-column elementor-col-25 elementor-inner-column">
+                <div class="elementor-widget-wrap elementor-element-populated">
+                  <div class="elementor-element elementor-widget elementor-widget-heading"><div class="elementor-widget-container"><h4 class="elementor-heading-title">Company</h4></div></div>
+                  <div class="elementor-element elementor-widget elementor-widget-icon-list"><div class="elementor-widget-container"><ul class="elementor-icon-list-items">
+                    <li class="elementor-icon-list-item"><a href="../abouts-us-b1/"><span class="elementor-icon-list-icon">&#8250;</span><span class="elementor-icon-list-text">About Us</span></a></li>
+                    <li class="elementor-icon-list-item"><a href="../meet-the-team/"><span class="elementor-icon-list-icon">&#8250;</span><span class="elementor-icon-list-text">Meet The Team</span></a></li>
+                    <li class="elementor-icon-list-item"><a href="../contact-us-b1/"><span class="elementor-icon-list-icon">&#8250;</span><span class="elementor-icon-list-text">Contact us</span></a></li>
+                    <li class="elementor-icon-list-item"><a href="../mortgages/"><span class="elementor-icon-list-icon">&#8250;</span><span class="elementor-icon-list-text">Mortgages</span></a></li>
+                    <li class="elementor-icon-list-item"><a href="../careers/"><span class="elementor-icon-list-icon">&#8250;</span><span class="elementor-icon-list-text">Careers</span></a></li>
+                  </ul></div></div>
+                </div>
+              </div>
+              <div class="elementor-column elementor-col-25 elementor-inner-column">
+                <div class="elementor-widget-wrap elementor-element-populated">
+                  <div class="elementor-element elementor-widget elementor-widget-heading"><div class="elementor-widget-container"><h4 class="elementor-heading-title">Company</h4></div></div>
+                  <div class="elementor-element elementor-widget elementor-widget-heading"><div class="elementor-widget-container"><h6 class="elementor-heading-title elementor-size-default">Sales Support</h6></div></div>
+                  <div class="elementor-element elementor-widget elementor-widget-heading"><div class="elementor-widget-container"><h3 class="elementor-heading-title"><a href="tel:023 9200 8575">023 9200 8575</a></h3></div></div>
+                  <div class="elementor-element elementor-widget elementor-widget-heading"><div class="elementor-widget-container"><h6 class="elementor-heading-title elementor-size-default">Email Business</h6></div></div>
+                  <div class="elementor-element elementor-widget elementor-widget-heading"><div class="elementor-widget-container"><h3 class="elementor-heading-title"><a href="mailto:southsea@bernardsea.co.uk">southsea@bernardsea.co.uk</a></h3></div></div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div style="background:#002337;padding:15px 0;text-align:center;">
+    <p style="font-family:Heebo,sans-serif;font-size:13px;color:rgba(255,255,255,0.5);margin:0;">Copyright © 2024 Bernards Estate Agents. All rights reserved. Powered by Carrot Top Marketing.</p>
+  </div>
+</div>
+
+<script src="../assets/js/properties.js"></script>
+<script>
+const SVG = {
+  bed: '<svg viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2V10c0-2.21-1.79-4-4-4z"/></svg>',
+  bath: '<svg viewBox="0 0 24 24"><path d="M7 7c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm13 5H4c-.55 0-1 .45-1 1v2c0 2.76 2.24 5 5 5h8c2.76 0 5-2.24 5-5v-2c0-.55-.45-1-1-1z"/></svg>',
+  couch: '<svg viewBox="0 0 24 24"><path d="M21 9V7c0-1.65-1.35-3-3-3H6C4.35 4 3 5.35 3 7v2c-1.65 0-3 1.35-3 3v5h2v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h2v-5c0-1.65-1.35-3-3-3zM5 7c0-.55.45-1 1-1h12c.55 0 1 .45 1 1v2.78c-.61.55-1 1.34-1 2.22v2H6v-2c0-.88-.39-1.67-1-2.22V7z"/></svg>',
+  ruler: '<svg viewBox="0 0 24 24"><path d="M19 12h-2v3h-3v2h5v-5zM7 9h3V7H5v5h2V9zm14-6H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16.01H3V4.99h18v14.02z"/></svg>',
+  camera: '<svg viewBox="0 0 24 24"><path d="M12 10.8c-1.77 0-3.2 1.43-3.2 3.2s1.43 3.2 3.2 3.2 3.2-1.43 3.2-3.2-1.43-3.2-3.2-3.2zM22 6h-4.05l-1.83-2H7.88L6.05 6H2C.9 6 0 6.9 0 8v12c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>',
+  heart: '<svg viewBox="0 0 24 24"><path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/></svg>',
+  share: '<svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>',
+  phone: '<svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>',
+  mail: '<svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>',
+  parking: '<svg viewBox="0 0 24 24"><path d="M13 3H6v18h4v-6h3c3.31 0 6-2.69 6-6s-2.69-6-6-6zm.2 8H10V7h3.2c1.1 0 2 .9 2 2s-.9 2-2 2z"/></svg>',
+  garden: '<svg viewBox="0 0 24 24"><path d="M12 22c4.97 0 9-4.03 9-9-4.97 0-9 4.03-9 9zM5.6 10.25c0 1.38 1.12 2.5 2.5 2.5.53 0 1.01-.16 1.42-.44l-.02.19c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5l-.02-.19c.4.28.89.44 1.42.44 1.38 0 2.5-1.12 2.5-2.5 0-1-.59-1.85-1.43-2.25.84-.4 1.43-1.25 1.43-2.25 0-1.38-1.12-2.5-2.5-2.5-.53 0-1.01.16-1.42.44l.02-.19C14.5 2.12 13.38 1 12 1S9.5 2.12 9.5 3.5l.02.19c-.4-.28-.89-.44-1.42-.44-1.38 0-2.5 1.12-2.5 2.5 0 1 .59 1.85 1.43 2.25-.84.4-1.43 1.25-1.43 2.25zM12 5.5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5S9.5 9.38 9.5 8s1.12-2.5 2.5-2.5zM3 13c0 4.97 4.03 9 9 9 0-4.97-4.03-9-9-9z"/></svg>',
+  access: '<svg viewBox="0 0 24 24"><path d="M12 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm7 14.5c0 .83-.67 1.5-1.5 1.5S16 19.33 16 18.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5zM12.5 6.9c-2 .31-3.44 1.84-3.68 3.79-.03.24.15.44.39.48.24.04.45-.13.49-.37.19-1.55 1.3-2.81 2.8-3.1V12h-.28c-.39 0-.76.12-1.08.34L7.59 14.8c-.27.18-.59.2-.87.07s-.49-.4-.52-.71L5.5 9.5c-.05-.4-.39-.7-.8-.7-.43 0-.78.37-.74.8l.89 5.9c.11.72.56 1.33 1.2 1.65l2.47 1.22-.76 2.89c-.1.38.13.76.51.86.38.1.76-.13.86-.51l.95-3.62c.07-.28.01-.58-.18-.81L8.5 15.6l2.1-1.4H12c.28 0 .5-.22.5-.5V7.4c0-.32-.23-.47-.5-.5z"/></svg>',
+  tax: '<svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>'
+};
+
+function getProperty() {
+  const params = new URLSearchParams(window.location.search);
+  const id = parseInt(params.get('id')) || 1;
+  return PROPERTIES.find(p => p.id === id) || PROPERTIES[0];
+}
+
+function renderGallery(p) {
+  const imgs = p.images;
+  let html = `
+    <div class="sp-gallery-main">
+      <img src="${imgs[0]}" alt="${p.title}" />
+    </div>
+    <div class="sp-gallery-side">
+      <div class="sp-gallery-thumb"><img src="${imgs[1] || imgs[0]}" alt="" /></div>
+      <div class="sp-gallery-thumb">
+        <img src="${imgs[2] || imgs[0]}" alt="" />
+        ${imgs.length > 3 ? `<div class="sp-gallery-photo-count">${SVG.camera} <span>${imgs.length} photos</span></div>` : ''}
+      </div>
+    </div>`;
+  document.getElementById('galleryGrid').innerHTML = html;
+}
+
+function renderHeader(p) {
+  let badgeHtml = '';
+  if (p.badge === 'FEATURED') badgeHtml = '<span class="sp-badge sp-badge-featured">FEATURED</span>';
+  else if (p.badge === 'REDUCED') badgeHtml = '<span class="sp-badge sp-badge-reduced">PRICE REDUCED</span>';
+  else if (p.badge === 'NEW HOME') badgeHtml = '<span class="sp-badge sp-badge-new">NEW HOME</span>';
+
+  document.getElementById('spHeaderSection').innerHTML = `
+    <div class="sp-header-top">
+      <div>
+        ${badgeHtml}
+        <h1 class="sp-header-address">${p.address}</h1>
+        <p class="sp-header-type">${p.title}</p>
+      </div>
+      <div class="sp-header-icons">
+        <button class="sp-header-icon-btn" title="Save" onclick="this.classList.toggle('active')">${SVG.heart}</button>
+        <button class="sp-header-icon-btn" title="Share">${SVG.share}</button>
+      </div>
+    </div>
+    <div class="sp-header-price-row">
+      <div>
+        <p class="sp-price-label">${p.priceLabel || 'Guide Price'}</p>
+        <p class="sp-price">${p.priceDisplay}</p>
+      </div>
+      <div class="sp-date-added">
+        <span>Listed on ${p.dateAdded}</span>
+      </div>
+    </div>
+  `;
+}
+
+function renderInfoStrip(p) {
+  document.getElementById('spInfoStrip').innerHTML = `
+    <div class="sp-info-item">
+      <div class="sp-info-item-icon">${SVG.bed}</div>
+      <p class="sp-info-item-label">Bedrooms</p>
+      <p class="sp-info-item-value">${p.beds}</p>
+    </div>
+    <div class="sp-info-item">
+      <div class="sp-info-item-icon">${SVG.bath}</div>
+      <p class="sp-info-item-label">Bathrooms</p>
+      <p class="sp-info-item-value">${p.baths}</p>
+    </div>
+    <div class="sp-info-item">
+      <div class="sp-info-item-icon">${SVG.couch}</div>
+      <p class="sp-info-item-label">Receptions</p>
+      <p class="sp-info-item-value">${p.reception}</p>
+    </div>
+    <div class="sp-info-item">
+      <div class="sp-info-item-icon">${SVG.ruler}</div>
+      <p class="sp-info-item-label">Size</p>
+      <p class="sp-info-item-value">${p.sqft.toLocaleString()} sq ft</p>
+    </div>
+    <div class="sp-info-item">
+      <p class="sp-info-item-label">Property Type</p>
+      <p class="sp-info-item-value">${p.subtype}</p>
+    </div>
+    <div class="sp-info-item">
+      <p class="sp-info-item-label">Tenure</p>
+      <p class="sp-info-item-value">${p.tenure || 'Freehold'}</p>
+    </div>
+  `;
+}
+
+function renderMain(p) {
+  const descShort = p.fullDescription.slice(0, 1).join('');
+  const descFull = p.fullDescription.slice(1).map(para => `<p>${para}</p>`).join('');
+
+  document.getElementById('spMain').innerHTML = `
+    <div class="sp-section">
+      <h2 class="sp-section-title">Key Features</h2>
+      <ul class="sp-key-features">
+        ${p.keyFeatures.map(f => `<li>${f}</li>`).join('')}
+      </ul>
+    </div>
+
+    <div class="sp-section">
+      <h2 class="sp-section-title">Property Description</h2>
+      <div class="sp-description-content">
+        <p>${descShort}</p>
+        <div id="descMore" style="display:none;">${descFull}</div>
+      </div>
+      <a class="sp-read-more" id="readMoreBtn" onclick="document.getElementById('descMore').style.display='block';this.style.display='none';">Read full description ›</a>
+    </div>
+
+    <div class="sp-section">
+      <h2 class="sp-section-title">EPC Rating</h2>
+      <div class="sp-epc-badge">
+        <span class="sp-epc-letter sp-epc-${(p.epcRating||'C').toLowerCase()}">${p.epcRating || 'C'}</span>
+        <span class="sp-epc-text">Energy Performance Certificate — Band ${p.epcRating || 'C'}</span>
+      </div>
+    </div>
+  `;
+}
+
+function renderAgentCard(p) {
+  document.getElementById('spAgentCard').innerHTML = `
+    <p class="sp-agent-marketed">MARKETED BY</p>
+    <div class="sp-agent-name-row">
+      <img class="sp-agent-logo" src="../wp-content/uploads/2025/01/Bernards-logo-final-e1572343780242.png" alt="Bernards" />
+      <div>
+        <p class="sp-agent-name">Bernards Estate Agents</p>
+        <p class="sp-agent-address">Southsea, Portsmouth</p>
+      </div>
+    </div>
+    <a class="sp-agent-more" href="../abouts-us-b1/">View all properties from this agent</a>
+    <a href="tel:02392008575" class="sp-agent-btn sp-agent-btn-primary" style="color:#fff !important;">${SVG.phone} <span style="color:#fff !important;white-space:nowrap;">Call: 023 9200 8575</span></a>
+    <a href="mailto:southsea@bernardsea.co.uk" class="sp-agent-btn sp-agent-btn-secondary">${SVG.mail} Email agent</a>
+    <button class="sp-agent-btn sp-agent-btn-secondary" onclick="openInquiryModal()" style="margin-bottom:8px;">${SVG.mail} Request details</button>
+    <div style="border-top:1px solid #e0e0e0;margin-top:8px;padding-top:16px;">
+      <a href="../valuations/" class="sp-agent-btn" style="background:var(--rm-purple);color:#fff !important;border:none;font-weight:700;">Book a Valuation</a>
+    </div>
+  `;
+}
+
+function renderInfoCards(p) {
+  document.getElementById('spInfoCards').innerHTML = `
+    <div class="sp-info-card">
+      <p class="sp-info-card-label">${SVG.tax} Council Tax</p>
+      <p class="sp-info-card-value">Band ${p.councilTax || 'C'}</p>
+    </div>
+    <div class="sp-info-card">
+      <p class="sp-info-card-label">${SVG.parking} Parking</p>
+      <p class="sp-info-card-value">${p.parking || 'Ask agent'}</p>
+    </div>
+    <div class="sp-info-card">
+      <p class="sp-info-card-label">${SVG.garden} Garden</p>
+      <p class="sp-info-card-value">${p.garden || 'Ask agent'}</p>
+    </div>
+    <div class="sp-info-card">
+      <p class="sp-info-card-label">${SVG.access} Accessibility</p>
+      <p class="sp-info-card-value">${p.accessibility || 'Ask agent'}</p>
+    </div>
+  `;
+}
+
+function renderMap(p) {
+  const mapHtml = p.lat && p.lng
+    ? `<div class="sp-map-container">
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=${p.lng-0.012}%2C${p.lat-0.006}%2C${p.lng+0.012}%2C${p.lat+0.006}&layer=mapnik&marker=${p.lat}%2C${p.lng}" allowfullscreen loading="lazy"></iframe>
+      </div>`
+    : `<div class="sp-map-container" style="display:flex;align-items:center;justify-content:center;background:#f4f5f7;">
+        <p style="color:#999;">Map view — ${p.address}</p>
+      </div>`;
+
+  document.getElementById('spMapSection').innerHTML = `
+    <h2 class="sp-section-title">Location</h2>
+    <p class="sp-map-address">${p.address}</p>
+    ${mapHtml}
+  `;
+}
+
+function renderSimilar(p) {
+  const similar = PROPERTIES.filter(s => s.id !== p.id).slice(0, 3);
+  if (similar.length === 0) return;
+  document.getElementById('similarGrid').innerHTML = similar.map(s => `
+    <a class="sp-similar-card" href="../single-property/?id=${s.id}">
+      <div class="sp-similar-card-img">
+        <img src="${s.images[0]}" alt="${s.title}" loading="lazy" />
+        <div class="sp-similar-card-price">${s.priceDisplay}</div>
+      </div>
+      <div class="sp-similar-card-body">
+        <h3 class="sp-similar-card-address">${s.address}</h3>
+        <p class="sp-similar-card-type">${s.subtype} · ${s.beds} bed${s.beds!==1?'s':''} · ${s.baths} bath${s.baths!==1?'s':''}</p>
+      </div>
+    </a>
+  `).join('');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const p = getProperty();
+  document.title = `${p.title} - ${p.address} | Bernards Estate Agents`;
+  renderGallery(p);
+  renderHeader(p);
+  renderInfoStrip(p);
+  renderMain(p);
+  renderAgentCard(p);
+  renderInfoCards(p);
+  renderMap(p);
+  renderSimilar(p);
+});
+</script>
+
+<!-- INQUIRY MODAL -->
+<div class="bernards-inquiry-overlay" id="inquiryOverlay">
+  <div class="bernards-inquiry-modal" id="inquiryModal">
+    <button class="biq-close" onclick="closeInquiryModal()">&#10005;</button>
+    <div id="inquiryFormContent">
+      <h3>Request Property Details</h3>
+      <p class="biq-property-ref" id="inquiryPropertyRef"></p>
+      <form id="inquiryForm" onsubmit="submitInquiry(event)">
+        <label for="biq-name">Your Name</label>
+        <input type="text" id="biq-name" name="name" required placeholder="Full name" />
+        <label for="biq-phone">Phone Number</label>
+        <input type="tel" id="biq-phone" name="phone" required placeholder="e.g. 07700 900000" />
+        <label for="biq-email">Email Address</label>
+        <input type="email" id="biq-email" name="email" required placeholder="you@example.com" />
+        <button type="submit" class="biq-submit">Send Enquiry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="bernards-lightbox-overlay" id="lightboxOverlay">
+  <button class="bernards-lightbox-close" onclick="closeLightbox()">&#10005;</button>
+  <button class="bernards-lightbox-nav bernards-lightbox-prev" onclick="lightboxNav(-1)">&#8249;</button>
+  <button class="bernards-lightbox-nav bernards-lightbox-next" onclick="lightboxNav(1)">&#8250;</button>
+  <img class="bernards-lightbox-img" id="lightboxImg" src="" alt="" />
+  <div class="bernards-lightbox-counter" id="lightboxCounter"></div>
+</div>
+
+<script>
+// === LIGHTBOX ===
+let lightboxImages = [];
+let lightboxIdx = 0;
+
+function openLightbox(idx) {
+  const p = getProperty();
+  lightboxImages = p.images || [];
+  lightboxIdx = idx || 0;
+  updateLightbox();
+  document.getElementById('lightboxOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightboxOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function lightboxNav(dir) {
+  lightboxIdx = (lightboxIdx + dir + lightboxImages.length) % lightboxImages.length;
+  updateLightbox();
+}
+
+function updateLightbox() {
+  document.getElementById('lightboxImg').src = lightboxImages[lightboxIdx];
+  document.getElementById('lightboxCounter').textContent = (lightboxIdx + 1) + ' / ' + lightboxImages.length;
+}
+
+document.getElementById('lightboxOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
+});
+
+document.addEventListener('keydown', function(e) {
+  const lb = document.getElementById('lightboxOverlay');
+  if (!lb.classList.contains('active')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') lightboxNav(-1);
+  if (e.key === 'ArrowRight') lightboxNav(1);
+});
+
+// Attach lightbox to gallery images after render
+const origRenderGallery = renderGallery;
+renderGallery = function(p) {
+  origRenderGallery(p);
+  setTimeout(function() {
+    const mainImg = document.querySelector('.sp-gallery-main');
+    if (mainImg) mainImg.onclick = function() { openLightbox(0); };
+    document.querySelectorAll('.sp-gallery-thumb').forEach(function(thumb, i) {
+      thumb.onclick = function() { openLightbox(i + 1); };
+    });
+  }, 50);
+};
+
+// === INQUIRY MODAL ===
+function openInquiryModal() {
+  const p = getProperty();
+  document.getElementById('inquiryPropertyRef').textContent = p.address + ' - ' + p.priceDisplay;
+  document.getElementById('inquiryFormContent').innerHTML = `
+    <h3>Request Property Details</h3>
+    <p class="biq-property-ref">${p.address} - ${p.priceDisplay}</p>
+    <form id="inquiryForm" onsubmit="submitInquiry(event)">
+      <label for="biq-name">Your Name</label>
+      <input type="text" id="biq-name" name="name" required placeholder="Full name" />
+      <label for="biq-phone">Phone Number</label>
+      <input type="tel" id="biq-phone" name="phone" required placeholder="e.g. 07700 900000" />
+      <label for="biq-email">Email Address</label>
+      <input type="email" id="biq-email" name="email" required placeholder="you@example.com" />
+      <button type="submit" class="biq-submit">Send Enquiry</button>
+    </form>
+  `;
+  document.getElementById('inquiryOverlay').classList.add('active');
+}
+
+function closeInquiryModal() {
+  document.getElementById('inquiryOverlay').classList.remove('active');
+}
+
+function submitInquiry(e) {
+  e.preventDefault();
+  document.getElementById('inquiryFormContent').innerHTML = `
+    <div class="bernards-inquiry-success">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+      <h4>Enquiry Sent!</h4>
+      <p>Thank you. A member of the Bernards team will be in touch shortly.</p>
+    </div>
+  `;
+  setTimeout(closeInquiryModal, 3000);
+}
+
+document.getElementById('inquiryOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeInquiryModal();
+});
+</script>
+
+<script src="../wp-content/themes/hello-elementor/assets/js/hello-frontend.min.js?ver=3.1.1"></script>
+</body>
+</html>
