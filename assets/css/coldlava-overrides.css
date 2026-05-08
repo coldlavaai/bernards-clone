@@ -1,0 +1,59 @@
+/* Cold Lava overrides — Stage 1 design fixes */
+
+/* === Social icon spacing (applies to every elementor-social-icons widget) === */
+.elementor-social-icons-wrapper.elementor-grid {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 14px !important;
+  align-items: center;
+}
+.elementor-social-icons-wrapper.elementor-grid .elementor-grid-item {
+  margin: 0 !important;
+}
+
+/* === Brand colours for social icons === */
+.elementor-social-icon-facebook-f {
+  background: #1877F2 !important;
+  color: #fff !important;
+}
+.elementor-social-icon-instagram {
+  background: radial-gradient(circle at 30% 110%, #ffdb8b 0%, #ee653d 25%, #d42e81 50%, #a233a1 75%, #6638b1 100%) !important;
+  color: #fff !important;
+}
+.elementor-social-icon-linkedin {
+  background: #0A66C2 !important;
+  color: #fff !important;
+}
+
+/* === "Follow us on social media" section: purple bg, white text === */
+.elementor-element-14c172ff {
+  background: #5D3384 !important;
+  padding: 56px 0 !important;
+}
+.elementor-element-14c172ff .elementor-heading-title {
+  color: #fff !important;
+}
+.elementor-element-14c172ff h3.elementor-heading-title {
+  margin-bottom: 12px;
+  font-size: 1.875rem;
+}
+.elementor-element-14c172ff h4.elementor-heading-title {
+  font-weight: 400;
+  opacity: 0.9;
+}
+.elementor-element-14c172ff .elementor-social-icons-wrapper.elementor-grid {
+  justify-content: flex-end;
+  gap: 16px !important;
+}
+.elementor-element-14c172ff .elementor-social-icon {
+  width: 44px;
+  height: 44px;
+  font-size: 18px;
+}
+
+/* Right-align socials column on desktop, centre on mobile */
+@media (max-width: 767px) {
+  .elementor-element-14c172ff .elementor-social-icons-wrapper.elementor-grid {
+    justify-content: center;
+  }
+}
