@@ -1,151 +1,164 @@
 # Bernards — Change List
 
-Tracking for the bernards.coldlava.ai overhaul. Ordered easy → complex within each page so we can ship value early without getting blocked on data/access.
+**Pivoting to Stage 2:** static-HTML edits paused. Continuing in a fresh Next.js rebuild.
+
+This file records what was shipped into the static site (Stage 1) and what's carried forward to the Next.js build (Stage 2). The static site at bernards.coldlava.ai keeps running until the new build is ready to swap in via domain alias.
 
 **Legend**
 
-- 🟢 **Easy** — copy/HTML/CSS, low risk, ship in minutes
-- 🟡 **Medium** — layout/structural, may touch many files
-- 🔴 **Complex** — needs data integration, JS feature work, or external API
-- ❓ **Needs your input** — ambiguous, decision required, or asset/credential needed
-- ⏸ **Defer** — explicitly parked
+- ✅ **Shipped (static)** — live on bernards.coldlava.ai now
+- ⏭ **Carry to Next.js** — port to Stage 2, do better
+- 🆕 **New for Stage 2** — wasn't in the original list but worth doing
+- ❓ **Needs your input/asset** — blocking
+- ⏸ **Defer** — parked for later
 
 ---
 
-## 🌐 Site-wide
+## ✅ Already shipped on the static site
 
-| # | Status | Item | Notes |
-|---|---|---|---|
-| S1 | 🟢 | Remove Twitter from socials block | `index.html` line ~1384, repeated in footer across all pages |
-| S2 | 🟢 | Remove Newsletter widget → replace with "Follow us on social media" call-out + social icons | `index.html` line ~1180; same in every page footer |
-| S3 | 🟡 | Set Futura as the site-wide font (case-sensitive use as designed) | Currently mix of Heebo/system. Will need `@font-face` + replace heading/body font stacks across CSS. Need confirmation: licensed Futura webfont or Adobe Typekit ID? |
-| S4 | 🔴 | Apply purple / white / grey colour scheme throughout | Need exact hex values (purple primary, accent grey, off-white). Affects buttons, headings, links, backgrounds — large surface area |
+These changes are live and the corresponding static-site decisions carry across to the rebuild as design intent.
 
----
-
-## 🏠 Home (`index.html`)
-
-| # | Status | Item | Notes |
-|---|---|---|---|
-| H1 | 🟢 | Change hero "SEARCH" button to "BUY" (keep order Sell / Buy / Rent or your preferred order) | Currently SELL → SEARCH → RENT. Confirm desired order |
-| H2 | 🟢 | Remove "We don't like to brag but…" heading | line 976 |
-| H3 | 🟢 | Replace "Read Our Reviews" CTA → make Google logo itself clickable, link to Southsea Google profile | ❓ Need: exact Google Business Profile URL for the Southsea branch |
-| H4 | 🟢 | Remove "We Partner With…" heading text | line 1112 — content row replaced by Insta feed (H10) |
-| H5 | 🟡 | Header: centralise logo, make bigger, 3 nav items each side | Restructures nav into split layout. Needs decision on which 3 items each side |
-| H6 | 🟡 | Move stats counters (offices / houses sold / social followers) up — directly below hero banner | Currently lower on page. Reposition the existing ticker section |
-| H7 | 🟡 | First row → "Icons and offices" | ❓ Ambiguous. Best guess: a row of office locations each with an icon (Southsea, Drayton, etc.). Confirm exactly what should appear |
-| H8 | 🟡 | Two-column section: Property Search (left) / Carousel (right) | ❓ Which existing row gets replaced? And carousel of *what* — featured properties, branch photos, social posts? |
-| H9 | 🟡 | Move office logos block → footer, single column, smaller | Easy if it's just the partner logos block (line ~1112+); confirm |
-| H10 | 🔴 | "We Partner With" row → live Instagram feed showing latest 4 posts, with new heading | Needs Instagram credentials. Recommended: Instagram Basic Display API token (long-lived) **or** a service like SnapWidget/Curator.io. Confirm approach |
-| H11 | 🔴 | Stats ticker — live social media follower count | Needs Instagram + Facebook + (others?) Graph API access. Confirm which networks to count |
-| H12 | 🔴 | Stats ticker — "Houses sold" counter that increments +1 every 48 min via CSS/JS | ❓ Need starting baseline number and the implied annual rate (24h / 48min ≈ 30 sales/day, 11k/year — that seems too high; please confirm cadence) |
-| H13 | 🔴 | Vebra API — wire up real property feed | Already coded in `api/vebra.js` but in placeholder mode. Needs `VEBRA_DATA_FEED_ID`, `VEBRA_USERNAME`, `VEBRA_PASSWORD` set in Vercel env vars. Once set, search becomes live |
-| H14 | 🔴 | "Google" element in hero → swap for "Follow us on social media" call-out | Identify which Google badge in hero, then swap for socials grid |
-
----
-
-## 🔎 Property Search (`for-sale/`, `for-rent/`, `property-search-b1/`)
-
-| # | Status | Item | Notes |
-|---|---|---|---|
-| P1 | 🟢 | Remove "Date listed on" line on cards, keep "Branch" | Card template — single CSS rule plus template tweak |
-| P2 | 🟡 | Remove banner (featured-over-image) | ❓ Confirm which element — the dark gradient banner over hero image, or the "Featured" badge on listing cards? |
-| P3 | 🟡 | Apply purple / white / grey colour scheme | Inherits from S4 — finalise palette there |
-
----
-
-## 📋 Selling (`selling/`)
-
-| # | Status | Item | Notes |
-|---|---|---|---|
-| SE1 | 🟢 | Remove "Sale No Fee" | Locate phrase, delete |
-| SE2 | 🟢 | Remove "Extensive Internet Advertising" | Same |
-| SE3 | 🟢 | Fix "being partner owned and run" → "partner owned and run" | Drop "being" |
-| SE4 | 🟢 | Add title above dropdown row → "What we do and how we do it" | New heading element |
-| SE5 | 🟡 | Move "6 steps" section up — directly below the hero top row | Reorder |
-| SE6 | 🟡 | Replace dropdown row → 4 icon boxes | ❓ Need: 4 icons + 4 headings + 4 short blurbs. Can repurpose dropdown content if titles map cleanly |
-| SE7 | 🔴 | Replace example video with one pulled from Bernards Instagram (if portrait, show 2 examples side-by-side) | ❓ Need: Instagram access OR specific video URLs. Portrait 9:16 layout decision |
-
----
-
-## 🏢 Landlords (`landlords/`)
-
-| # | Status | Item | Notes |
-|---|---|---|---|
-| L1 | 🟡 | Move "Tailored services" block below the stats block | Reorder existing sections |
-| L2 | 🟡 | Add 2 new photos | ❓ Need: image files + decision on placement (replace existing or insert) |
-| L3 | 🟡 | Replace dropdowns with FAQ Q&A list | I can draft Q&A from existing site copy + ChatGPT-style suggestions, you approve before publishing |
-| L4 | 🔴 | Build a stats table (replacing the stats image) — service options + tabbed menu of changes | ❓ Need clarity: is this a pricing/services comparison table? Need column headings + rows |
-| L5 | 🔴 | Display letting agency fee | ❓ Pull from bernardsestates.co.uk — need confirmation I can scrape, or paste the figures here |
-| L6 | 🔴 | "Process of letting" — add full explanation section | ❓ Pull from existing live site — confirm scraping access or paste content |
-
----
-
-## 📞 Contact Us (`contact-us/`)
-
-| # | Status | Item | Notes |
-|---|---|---|---|
-| C1 | 🟢 | Remove pre-text on contact info — show just number, email, address | Trim labels/sentence intros |
-| C2 | 🟡 | Reduce on-scroll motion — turn off slide-in animations | Disable Elementor `data-settings={"_animation":...}` attrs site-wide on this page |
-| C3 | 🔴 | Add branch opening times | ❓ Pull from existing site, or paste hours per branch |
-
----
-
-## 👥 Meet The Team (`meet-the-team/`)
-
-| # | Status | Item | Notes |
-|---|---|---|---|
-| T1 | 🟢 | Remove slide-in transition | CSS animation removal |
-| T2 | 🟡 | Show name/role on the front of each card (no hover required) | Restyle card so info is always visible |
-| T3 | 🟡 | Add search box to filter team members by name | Lightweight client-side JS — read all `.team-card` names, filter on input |
-
----
-
-## 🏘 Land And New Home (`land-an-new-home/`)
-
-| # | Status | Item | Notes |
-|---|---|---|---|
-| LN1 | ⏸ | Add existing developments | Explicitly parked for later per your note |
-
----
-
-## 🏬 Commercial (NEW)
-
-| # | Status | Item | Notes |
-|---|---|---|---|
-| CM1 | 🔴 | Add Commercial properties filter to search | Same setup as residential — needs Vebra (does Vebra feed include commercial listings? to confirm) |
-| CM2 | 🔴 | Build Commercial page (mirror of /for-sale layout, commercial properties only) | Defer to Phase 2 if scope is tight |
-
----
-
-## ❓ Items requiring your input or assets before I can ship
-
-| Ref | What I need |
+| # | Item |
 |---|---|
-| H3 | Google Business Profile URL for the Southsea branch |
-| H7 | What goes in the "Icons and offices" first row — confirm exact list |
-| H8 | Which existing row becomes the 2-column Property Search / Carousel — and what's in the carousel |
-| H10, H11, SE7 | Instagram access (long-lived token) **or** decision to use SnapWidget/Curator/etc. |
-| H11 | Which social networks contribute to the "follower count" total |
-| H12 | Houses-sold counter — starting number + true increment cadence |
-| H13 | Vebra credentials (`VEBRA_DATA_FEED_ID`, `VEBRA_USERNAME`, `VEBRA_PASSWORD`) |
-| P2 | "Banner" — which element exactly? |
-| L2 | Two new landlord photos |
-| L4 | Stats table columns/rows + tab structure |
-| L5, L6, C3 | Confirm I can scrape bernardsestates.co.uk for fee/process/opening times — or paste content here |
-| S3 | Futura licence — webfont ID/file |
-| S4 | Exact purple/white/grey hex codes |
-| SE6 | 4 icon-box icons + headings + blurbs (or "use dropdown content as-is") |
+| S1 | Twitter removed from socials |
+| S2 | Newsletter → "Follow us on social media" + Facebook/Instagram/LinkedIn icons |
+| H1 | Hero CTAs reordered to **BUY / RENT / SELL** |
+| H2 | "We don't like to brag but…" heading removed |
+| H4 | "We Partner With…" heading hidden |
+| H6 | Stats counters (4,000+ properties / £235m / 54 team) repositioned directly below hero |
+| H9 | Partner logos shrunk and pushed to bottom-of-page |
+| P1 | "Date listed on" removed from property search cards |
+| SE1, SE2 | "No sale, no fee" + "Extensive internet advertising" removed |
+| SE3 | "Being partner owned and run" → "Partner owned and run" |
+| SE4 | "What we do and how we do it" heading added above selling-page dropdowns |
+| SE5 | 6-Step Selling Process moved to under hero |
+| T1 | Team page slide-in animations removed |
+| T2 | Team cards: name/role visible by default |
+| C1 | Contact pages: stripped "Telephone:"/"Email:"/"Address:" labels |
+| C2 | Contact-us slide-in animations removed |
+| design | Brand-coloured social icons (real Instagram gradient), purple "Follow us" band with white text, override stylesheet for site-wide tweaks |
+| nav | "Abouts Us" → "About Us"; "Land an New Home" → "Land And New Home"; "– B1" stripped from visible nav across all pages |
+
+**Reverted in Stage 1:** H5 (centred logo with 3 nav each side) — the Elementor static export's nested column markup made the DOM split too brittle. Carry to Stage 2 where the header is one component.
 
 ---
 
-## Suggested execution order
+## ⏭ Carry to Stage 2 (Next.js rebuild)
 
-1. **Quick-win sweep** — S1, S2, H1, H2, H4, P1, SE1, SE2, SE3, SE4, T1, C1 (≈30 min, no blockers)
-2. **Layout pass** — H5, H6, H9, L1, T2, SE5, C2 (≈1–2 hrs, no blockers)
-3. **Content gathered** — once you give me Google URL, fee/hours/process content, photos: H3, L2, L3, L5, L6, C3
-4. **Design system** — S3 (Futura), S4 (palette), then P3 inherits
-5. **Feature builds** — T3 (team search), SE6 (icon boxes)
-6. **Integrations** — H13 (Vebra), H10/H11/SE7 (Instagram), H12 (sold counter)
-7. **Net-new pages** — CM1, CM2 (Commercial)
-8. **Deferred** — LN1
+Each becomes a clean, native implementation.
+
+### Header & global
+
+| # | Item |
+|---|---|
+| H5 | Centred bigger logo, 3 nav items each side, real mobile drawer |
+| S3 | Futura site-wide as design-tokens font |
+| S4 | Purple / white / grey palette as CSS custom properties |
+
+### Home
+
+| # | Item |
+|---|---|
+| H3 | Google logo → clickable Southsea Google Business Profile |
+| H7 | First row "Icons and offices" |
+| H8 | Two-column section: Property Search + Carousel |
+| H10 | Live Instagram feed (latest 4 posts) replacing partner-with row |
+| H11 | Live social-follower counter as part of stats |
+| H12 | Houses-sold animated counter (real Bernards rate) |
+| H13 | Vebra API live integration |
+| H14 | Hero "Google" element → "Follow us on social media" call-out |
+
+### Property Search
+
+| # | Item |
+|---|---|
+| P2 | Remove banner (featured-over-image) |
+| P3 | Apply palette |
+
+### Selling
+
+| # | Item |
+|---|---|
+| SE6 | Replace dropdowns with 4 icon boxes |
+| SE7 | Pull example video from Bernards Instagram (portrait → 2 examples) |
+
+### Landlords
+
+| # | Item |
+|---|---|
+| L2 | Two new landlord photos |
+| L3 | Replace dropdowns with FAQ Q&A |
+| L4 | Stats table replacing image (service options + tabbed menu of charges) |
+| L5 | Letting agency fee on page |
+| L6 | "Process of letting" content section |
+
+### Contact
+
+| # | Item |
+|---|---|
+| C3 | Branch opening times |
+
+### Team
+
+| # | Item |
+|---|---|
+| T3 | Search box to filter team by name |
+
+### New page
+
+| # | Item |
+|---|---|
+| CM1 | Commercial properties in search |
+| CM2 | Dedicated Commercial page |
+
+### Defer
+
+| # | Item |
+|---|---|
+| LN1 | Existing developments under Land And New Home |
+
+---
+
+## 🆕 Picked up for Stage 2
+
+Things the rebuild gives us for free or that should be done while we're rebuilding anyway.
+
+- **Headless CMS layer** so Bernards staff can update copy/staff/news without a dev (Sanity recommended — free tier, generous, native to Next.js)
+- **Image optimization** via `next/image` (smaller bundles, automatic AVIF/WebP, lazy-loading)
+- **Real responsive nav** (hamburger drawer with focus management, ARIA)
+- **Sitemap, robots.txt, OG tags, structured data** generated at build time
+- **Edge caching + ISR** so pages are fast globally
+- **One source of truth for nav, footer, branch data** — no more copy-paste across 22 pages
+
+---
+
+## ❓ Items requiring your input or assets
+
+Blocking nothing for the scaffold, but each unblocks specific items as we go.
+
+| Asset | Blocks |
+|---|---|
+| Google Business Profile URL (Southsea) | H3 |
+| Vebra credentials | H13 + live property search |
+| Bernards annual sales figure + counter baseline | H12 |
+| Futura licence (webfont or Adobe Typekit ID) | S3 |
+| Two landlord photos | L2 |
+| Permission to scrape bernardsestates.co.uk for fee/process/opening hours | L5, L6, C3 |
+| Decision: which row becomes 2-col Property Search + Carousel; what's in the carousel | H8 |
+| Definition of "Icons and offices" first row | H7 |
+| Instagram approach (SnapWidget vs native API) | H10, H11, SE7, H14 |
+| CMS decision (Sanity / Payload / no CMS) | content-editing workflow |
+| Palette source (sample bernardsestates.co.uk vs hex codes you provide) | S4, all coloured surfaces |
+
+---
+
+## Stage 2 (Next.js rebuild) — high-level plan
+
+1. **Scaffold** new repo `coldlavaai/bernards-next` (or your preferred name); Next.js 16 App Router, TypeScript, Tailwind 4, Vercel project linked
+2. **Extract assets** from `~/bernards-clone/wp-content/uploads/` into `public/` of the new app
+3. **Build the global shell** — `<Header>`, `<Footer>`, layout, design tokens (CSS variables), Tailwind config
+4. **Port pages one at a time** — Home → Property Search → Selling → Landlords → Land & New Home → Meet the Team → Contact → About → Careers → Mortgages
+5. **Wire integrations** — Vebra (when creds arrive), Instagram, Google reviews
+6. **Add CMS layer** if chosen
+7. **QA + perf pass** — Core Web Vitals, accessibility, mobile
+8. **Cutover** — point bernards.coldlava.ai alias from old project to new one
