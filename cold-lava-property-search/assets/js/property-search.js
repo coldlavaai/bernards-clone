@@ -102,7 +102,6 @@
                 '<div class="rm-card-footer">' +
                     '<div class="rm-card-agent-row">' +
                         '<div class="rm-card-agent-meta">' +
-                            '<span class="rm-card-date">Listed on ' + escHtml(p.dateAdded || 'N/A') + '</span>' +
                             '<span class="rm-card-agent-name">' + escHtml(agentName) + '</span>' +
                         '</div>' +
                     '</div>' +
