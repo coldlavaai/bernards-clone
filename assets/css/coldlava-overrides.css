@@ -57,3 +57,110 @@
     justify-content: center;
   }
 }
+
+/* === H5: Header — centred logo, 3 nav items each side === */
+.elementor-element-44f83af5 > .elementor-container {
+  display: grid !important;
+  grid-template-columns: 1fr auto 1fr !important;
+  align-items: center;
+  gap: 32px;
+}
+.elementor-element-44f83af5 > .elementor-container > .elementor-column {
+  width: auto !important;
+  flex: 0 0 auto !important;
+  max-width: none !important;
+}
+.elementor-element-44f83af5 .cl-nav-left { grid-column: 1; }
+.elementor-element-44f83af5 .elementor-element-66762fe8 { grid-column: 2; }
+.elementor-element-44f83af5 .cl-nav-right { grid-column: 3; }
+
+/* Bigger centred logo */
+.elementor-element-66762fe8 .elementor-element-21bc90e9 {
+  display: flex;
+  justify-content: center;
+}
+.elementor-element-66762fe8 img {
+  max-height: 78px !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+/* Left and right nav menus — flex rows, opposite alignment */
+.cl-nav-left .elementor-nav-menu,
+.cl-nav-right .elementor-nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.cl-nav-left .elementor-nav-menu { justify-content: flex-end; }
+.cl-nav-right .elementor-nav-menu { justify-content: flex-start; }
+.cl-nav-left  .elementor-nav-menu li,
+.cl-nav-right .elementor-nav-menu li { margin: 0 !important; }
+
+/* Hide mobile toggle on the left column (it lives in the right column only) */
+.cl-nav-left .elementor-menu-toggle { display: none !important; }
+
+/* Mobile collapse: stack header, show one consolidated mobile nav */
+@media (max-width: 1024px) {
+  .elementor-element-44f83af5 > .elementor-container {
+    grid-template-columns: 1fr auto 1fr !important;
+    gap: 12px;
+  }
+  .elementor-element-66762fe8 img { max-height: 56px !important; }
+  .cl-nav-left .elementor-nav-menu,
+  .cl-nav-right .elementor-nav-menu {
+    gap: 14px;
+    font-size: 0.95rem;
+  }
+}
+@media (max-width: 767px) {
+  .elementor-element-44f83af5 > .elementor-container {
+    grid-template-columns: 1fr auto 1fr !important;
+  }
+  .cl-nav-left .elementor-nav-menu,
+  .cl-nav-right .elementor-nav-menu { display: none !important; }
+}
+
+/* === H9: Partner logos — smaller, footer-tier === */
+.elementor-element-10b4d63 {
+  padding: 28px 0 12px !important;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  background: #fafafa;
+}
+.elementor-element-10b4d63 img {
+  max-height: 44px !important;
+  width: auto !important;
+  opacity: 0.75;
+  transition: opacity 0.2s ease;
+}
+.elementor-element-10b4d63 img:hover {
+  opacity: 1;
+}
+.elementor-element-10b4d63 .elementor-element-3d0f528 {
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+}
+.elementor-element-10b4d63 .elementor-widget-image {
+  flex: 0 0 auto;
+  margin: 0 !important;
+}
+
+/* === T2: Team cards — name/role always visible, no hover/slide === */
+.elementor-widget-elementskit-team .profile-image-card .hover-area,
+.profile-image-card.ekit-team-style-overlay .hover-area {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  transition: none !important;
+  -webkit-transition: none !important;
+}
+.profile-image-card.ekit-team-style-overlay .hover-area * {
+  transform: none !important;
+  transition: none !important;
+}
